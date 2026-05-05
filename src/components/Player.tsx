@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 
 const STREAM_URL = "https://myradio24.org/genesia";
+const NOWPLAYING_URL = "https://functions.poehali.dev/6556af3b-cdf7-4fb7-b0f2-0997d65c530c";
 
 export default function Player() {
   const [playing, setPlaying] = useState(false);
@@ -9,6 +10,22 @@ export default function Player() {
   const [loading, setLoading] = useState(false);
   const [nowPlaying, setNowPlaying] = useState("Радио Генезия — в эфире");
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const fetchNowPlaying = async () => {
+    try {
+      const res = await fetch(NOWPLAYING_URL);
+      const data = await res.json();
+      if (data.title || data.artist) {
+        const text = data.artist
+          ? `${data.artist} — ${data.title}`
+          : data.title;
+        setNowPlaying(text);
+      }
+    } catch {
+      // тихо игнорируем
+    }
+  };
 
   useEffect(() => {
     const audio = new Audio();
@@ -26,9 +43,14 @@ export default function Player() {
       setPlaying(false);
     });
 
+    // Получаем трек сразу и потом каждые 20 секунд
+    fetchNowPlaying();
+    pollRef.current = setInterval(fetchNowPlaying, 20000);
+
     return () => {
       audio.pause();
       audio.src = "";
+      if (pollRef.current) clearInterval(pollRef.current);
     };
   }, []);
 
