@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 
-const STREAM_URL = "https://stream.zeno.fm/0r0xa792kwzuv";
+const STREAM_URL = "https://myradio24.org/genesia";
 
 export default function Player() {
   const [playing, setPlaying] = useState(false);
