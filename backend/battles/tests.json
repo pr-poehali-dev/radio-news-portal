@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Get all battles",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {"battles": []},
+      "bodyMatcher": "partial"
+    }
+  ]
+}

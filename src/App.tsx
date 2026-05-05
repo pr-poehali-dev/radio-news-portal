@@ -11,6 +11,8 @@ import Votes from "./pages/Votes";
 import Requests from "./pages/Requests";
 import About from "./pages/About";
 import Contacts from "./pages/Contacts";
+import Battles from "./pages/Battles";
+import AdminBattles from "./pages/AdminBattles";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,9 +30,11 @@ const App = () => (
             <Route path="/contests" element={<Contests />} />
             <Route path="/votes" element={<Votes />} />
             <Route path="/requests" element={<Requests />} />
+            <Route path="/battles" element={<Battles />} />
             <Route path="/about" element={<About />} />
             <Route path="/contacts" element={<Contacts />} />
           </Route>
+          <Route path="/admin/battles" element={<AdminBattles />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -7,6 +7,7 @@ const navItems = [
   { to: "/", label: "Главная" },
   { to: "/news", label: "Новости" },
   { to: "/contests", label: "Конкурсы" },
+  { to: "/battles", label: "Батлы" },
   { to: "/votes", label: "Голосования" },
   { to: "/requests", label: "Заказы" },
   { to: "/about", label: "О радио" },
